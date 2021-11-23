@@ -36,7 +36,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v3
         with:
-          images: martikan/mastore-accountManagement
+          images: martikan/mastore-account-management
       - name: Login to DockerHub
         uses: docker/login-action@v1
         with:
