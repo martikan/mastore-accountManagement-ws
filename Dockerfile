@@ -16,6 +16,6 @@ RUN mkdir /app
 
 COPY --from=build /home/gradle/src/build/libs/*.jar /usr/local/lib/accountManagementApi.jar
 
-EXPOSE 8081
+EXPOSE 8083
 
 ENTRYPOINT ["java","-jar","/usr/local/lib/accountManagementApi.jar"]

@@ -1,28 +1,18 @@
 spring:
-  datasource:
-    url: ${DATASOURCE_URL:jdbc:h2:mem:accountManagement}
-    username: ${DATASOURCE_USER:sa}
-    password: ${DATASOURCE_PASSWORD:}
-    driver-class-name: ${DATASOURCE_DRIVER_CLASS_NAME:org.h2.Driver}
-  jpa:
-    properties:
-      "[hibernate.generate_statistics]": true
-      "[org.hibernate.envers.audit_table_suffix]": _log
-    database-platform: ${DATASOURCE_DIALECT:org.hibernate.dialect.H2Dialect}
-    show-sql: true
-  liquibase:
-    enabled: true
-    url: ${DATASOURCE_URL:jdbc:h2:mem:accountManagement}
-    user: ${DATASOURCE_USER:sa}
-    password: ${DATASOURCE_PASSWORD:}
-  h2:
-    console:
-      enabled: true
-      path: /h2
+  data:
+    mongodb:
+      authentication-database: admin
+      username: ${DATASOURCE_USER:admin}
+      password: ${DATASOURCE_PASSWORD:aaa}
+      database: ${DATASOURCE_DB_NAME:accountManagement}
+      host: ${DATASOURCE_HOST:localhost}
+      port: ${DATASOURCE_PORT:27017}
+  config:
+    import: optional:configserver:${CONFIG_SERVER_URI:http://localhost:8082}
 eureka:
   client:
     service-url:
-      default-zone: ${EUREKA_DEFAULT_ZONE:http://localhost:8761}
+      defaultZone: ${EUREKA_DEFAULT_ZONE:http://localhost:8761}
 
 management:
   endpoints:
