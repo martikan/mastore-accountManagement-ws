@@ -8,4 +8,6 @@ public interface RegistrationService {
 
     void consumeMessages(final RegistrationReferenceDTO dto) throws MessagingException;
 
+    boolean verifyVerificationToken(final String token);
+
 }

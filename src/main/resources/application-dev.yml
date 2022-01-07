@@ -1,3 +1,6 @@
+
+loadBalancerAddress: ${LOAD_BALANCER_ADDRESS:http://localhost:8081}
+
 spring:
   data:
     mongodb:

@@ -22,9 +22,15 @@ public class JwtUtils {
     @Value("${token.secret}")
     private String secret;
 
-    public boolean isVerificationTokenValid(final String jwtToken) {
+    /**
+     * If valid, then the `userId` will be returned.
+     * Else Null.
+     * @param jwtToken - JWT Token.
+     * @return UserId.
+     */
+    public Long verificationTokenValid(final String jwtToken) {
 
-        var valid = false;
+        Long userId = null;
 
         try {
 
@@ -35,14 +41,18 @@ public class JwtUtils {
                     .getSubject();
 
             if (subject != null && !subject.isBlank()) {
-                valid = true;
+                try {
+                    userId = Long.parseLong(subject);
+                } catch (Exception e) {
+                    log.error("Cannot cast userId to Long.");
+                }
             }
 
         } catch (Exception e) {
             log.warn("JWT Token validation error", e);
         }
 
-        return valid;
+        return userId;
     }
 
     public String generateVerificationToken(final String email) {

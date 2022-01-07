@@ -6,4 +6,9 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface RegistrationRepository extends ReactiveCrudRepository<Registration, String> {
+
+    boolean existsByUserId(final Long userId);
+
+    void deleteAllByUserId(final Long userId);
+
 }

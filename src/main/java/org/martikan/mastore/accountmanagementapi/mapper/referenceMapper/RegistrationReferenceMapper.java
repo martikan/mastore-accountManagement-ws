@@ -11,7 +11,6 @@ import org.martikan.mastore.accountmanagementapi.dto.referenceDTO.RegistrationRe
 @Mapper(componentModel = "spring")
 public interface RegistrationReferenceMapper {
 
-    @Mapping(target = "id", ignore = true)
     @Mapping(target = "userId", source = "id")
     Registration toEntity(RegistrationReferenceDTO dto);
 

@@ -1,6 +1,8 @@
 server:
   port: ${PORT:0}
 
+loadBalancerAddress: ${LOAD_BALANCER_ADDRESS}
+
 kafka:
   groupId: ${GROUP_ID:account-management-${GROUP_ID_POSTFIX:1}}
 
