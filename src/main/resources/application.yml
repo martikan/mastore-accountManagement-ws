@@ -1,29 +1,29 @@
 server:
   port: ${PORT:0}
 
+loadBalancerAddress: ${LOAD_BALANCER_ADDRESS}
+
+kafka:
+  groupId: ${GROUP_ID:account-management-${GROUP_ID_POSTFIX:1}}
+
 spring:
   application:
     name: account-management-ws
-  datasource:
-    url: ${DATASOURCE_URL}
-    username: ${DATASOURCE_USER}
-    password: ${DATASOURCE_PASSWORD}
-    driver-class-name: ${DATASOURCE_DRIVER_CLASS_NAME}
-  jpa:
-    database-platform: ${DATASOURCE_DIALECT}
-    hibernate:
-      ddl-auto: validate
-    generate-ddl: false
-  liquibase:
-    enabled: true
-    url: ${DATASOURCE_URL}
-    user: ${DATASOURCE_USER}
-    password: ${DATASOURCE_PASSWORD}
-    change-log: classpath:db/changelog/changelog-master.xml
+  data:
+    mongodb:
+      auto-index-creation: true
+      authentication-database: admin
+      username: ${DATASOURCE_USER}
+      password: ${DATASOURCE_PASSWORD}
+      database: ${DATASOURCE_DB_NAME}
+      host: ${DATASOURCE_HOST}
+      port: ${DATASOURCE_PORT}
+  config:
+    import: optional:configserver:${CONFIG_SERVER_URI}
 eureka:
   client:
     service-url:
-      default-zone: ${EUREKA_DEFAULT_ZONE}
+      defaultZone: ${EUREKA_DEFAULT_ZONE}
 
 management:
   endpoint:
