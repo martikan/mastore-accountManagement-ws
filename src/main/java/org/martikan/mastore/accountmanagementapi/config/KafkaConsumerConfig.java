@@ -31,7 +31,7 @@ public class KafkaConsumerConfig {
 
         JsonDeserializer<Object> deserializer = new JsonDeserializer<>(Object.class);
         deserializer.setRemoveTypeHeaders(false);
-        deserializer.addTrustedPackages("org.martikan.mastore.userapi.dto.user.UserDTO");
+        deserializer.addTrustedPackages("*");
 
         var configProps = new HashMap<String, Object>();
         configProps.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapAddress);
