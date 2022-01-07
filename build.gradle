@@ -37,6 +37,7 @@ dependencies {
     annotationProcessor "org.mapstruct:mapstruct-processor:${mapstructVersion}"
     annotationProcessor 'org.projectlombok:lombok-mapstruct-binding:0.1.0'
 
+    implementation 'javax.mail:mail:1.4.7'
     implementation 'io.jsonwebtoken:jjwt:0.9.1'
     compileOnly('org.springframework.boot:spring-boot-starter-mail')
     implementation 'org.springframework.kafka:spring-kafka:2.8.0'
