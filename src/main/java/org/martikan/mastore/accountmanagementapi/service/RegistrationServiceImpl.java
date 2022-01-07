@@ -2,6 +2,7 @@ package org.martikan.mastore.accountmanagementapi.service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.martikan.mastore.accountmanagementapi.config.KafkaTopicConfig;
 import org.martikan.mastore.accountmanagementapi.domain.Registration;
 import org.martikan.mastore.accountmanagementapi.dto.VerifiedAccountDTO;
@@ -11,6 +12,7 @@ import org.martikan.mastore.accountmanagementapi.repository.RegistrationReposito
 import org.martikan.mastore.accountmanagementapi.utils.JwtUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.kafka.annotation.KafkaListener;
+import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.stereotype.Service;
 
 import javax.mail.MessagingException;
@@ -43,7 +45,13 @@ public class RegistrationServiceImpl implements RegistrationService {
 
     @Override
     @KafkaListener(topics = "registeredUsers", groupId = "${kafka.groupId}")
-    public void consumeMessages(final RegistrationReferenceDTO dto) throws MessagingException {
+    public void consumeMessages(ConsumerRecord<String, RegistrationReferenceDTO> consumerRecord,
+                                @Payload RegistrationReferenceDTO payload) throws MessagingException {
+
+        log.info("received key {}: Type [{}] | Payload: {} | Record: {}", consumerRecord.key(),
+                consumerRecord.headers(), payload, consumerRecord);
+
+        var dto = consumerRecord.value();
 
         if (registrationRepository.existsByUserId(dto.getId())) {
             return;
